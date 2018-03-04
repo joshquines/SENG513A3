@@ -1,26 +1,47 @@
 // shorthand for $(document).ready(...)
+window.onload=toBottom;
+
+function toBottom()
+{
+alert("Scrolling to bottom ...");
+window.scrollTo(0, document.body.scrollHeight);
+}
 $(function chatHandler() {
     var socket = io();
-
-    // CHAT STUFF
-    $('form').submit(function(){
+    $('form').submit(function chatHandler(){
         socket.emit('chat', $('#m').val());
-        // Parse message here
-        if ($('#m').val().startsWith("/nick ")){
-            socket.emit('changeUser', "yoyoyoyo");
-        }
-        else if($('#m').val().startsWith("/nickcolor ")){
-            socket.emit('changeUserColor', "yoyoyoyo");
-        }
-        else{
-            socket.on('chat', function chatHandler(msg){
-                $('#messages').append($('<li>').text(msg + 'hahahaha'));
-        });
-    }
-    return false;
+        $('#m').val('');
+        return false;
+    });
+    socket.on('chat', function chatHandler(msg){
+        $('#messages').append($('<li>').html(msg));
+        $('#messages').animate({scrollTop: $('#messages').prop("scrollHeight")}, 500);
+        
+    });
+    socket.on('userchat', function chatHandler(msg){
+        $('#messages').append($('<li>').html(msg)); 
+        $('#messages').animate({scrollTop: $('#messages').prop("scrollHeight")}, 500);
     });
 
-    // DO LOGIN STUFF HERE
-    
+    socket.on('myusername', function chatHandler(msg){
+        $('#myusername').html("Your Username: " + msg);
+    });
+
+    socket.on('userlist', function chatHandler(msg){
+        $('#userlist').html("");
+        let list = [];
+        list = msg;
+        
+        for (let i = 0; i < list.length; i++){
+            $('#userlist').append($('<li>').text(list[i]));
+        } 
+    });
 });
 
+
+// User List
+// Get userList array userList from dict
+function nicknameList(userList){
+    var socket = io();
+
+}
