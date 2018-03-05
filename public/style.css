@@ -21,11 +21,15 @@ form button {
     border: none; 
     padding: 10px; }
 
+#chatdiv{
+    border-bottom: 5%;
+    padding-bottom: 50px;
+}
+
 #messages { 
     float: left;
     list-style-type: none; 
     margin: 0; 
-    
     padding: 0; 
     width: 60%;
     height: 90%;

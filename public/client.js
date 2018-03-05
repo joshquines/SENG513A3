@@ -1,10 +1,6 @@
-// shorthand for $(document).ready(...)
-window.onload=toBottom;
-
-function toBottom()
-{
-alert("Scrolling to bottom ...");
-window.scrollTo(0, document.body.scrollHeight);
+function scroll(){
+    var scrollDiv = document.getElementById("chatdiv");
+    scrollDiv.scrollTop = scrollDiv.scrollHeight;
 }
 $(function chatHandler() {
     var socket = io();
@@ -15,12 +11,11 @@ $(function chatHandler() {
     });
     socket.on('chat', function chatHandler(msg){
         $('#messages').append($('<li>').html(msg));
-        $('#messages').animate({scrollTop: $('#messages').prop("scrollHeight")}, 500);
-        
+        scroll();
     });
     socket.on('userchat', function chatHandler(msg){
         $('#messages').append($('<li>').html(msg)); 
-        $('#messages').animate({scrollTop: $('#messages').prop("scrollHeight")}, 500);
+        scroll();
     });
 
     socket.on('myusername', function chatHandler(msg){
@@ -39,9 +34,3 @@ $(function chatHandler() {
 });
 
 
-// User List
-// Get userList array userList from dict
-function nicknameList(userList){
-    var socket = io();
-
-}
