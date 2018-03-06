@@ -97,7 +97,7 @@ io.on('connection', function(socket){
                 chatMessages.push(chatMessage);
                 socket.emit('userchat', chatMessage.bold());
                 socket.broadcast.emit('chat', chatMessage);
-                socket.emit('chat', "This username is already in use.")
+                socket.emit('chat', "This username is already in use.".fontcolor("red"));
             }
             else{
                 // Replace socket.nickname
