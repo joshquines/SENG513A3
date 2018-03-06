@@ -1,3 +1,11 @@
+/*
+    Marco Quines
+    10138118
+    SENG 513
+    A3 
+    B01
+*/
+
 function scroll(){
     var scrollDiv = document.getElementById("chatdiv");
     scrollDiv.scrollTop = scrollDiv.scrollHeight;
@@ -28,7 +36,7 @@ $(function chatHandler() {
         list = msg;
         
         for (let i = 0; i < list.length; i++){
-            $('#userlist').append($('<li>').text(list[i]));
+            $('#userlist').append($('<li>').html(list[i].fontcolor("white")));
         } 
     });
 });

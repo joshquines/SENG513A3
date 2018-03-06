@@ -1,3 +1,11 @@
+/*
+    Marco Quines
+    10138118
+    SENG 513
+    A3 
+    B01
+*/
+
 var express = require('express');
 var app = express();
 var http = require('http').createServer(app);
@@ -14,7 +22,7 @@ app.use(express.static(__dirname + '/public'));
 let numUsers = 0;
 let userList = [];
 let chatMessages = [];
-let colors = ["red", "blue", "green", "black", "yellow", "gray", "maroon", "pink", "purple", "lime", "aqua"];
+let colors = ["red", "blue", "green", "white", "yellow", "gray", "maroon", "pink", "purple", "lime", "aqua"];
 let ul = "";
 
 function nameGenerator(){
@@ -39,7 +47,7 @@ function findUser(key, value) {
 io.on('connection', function(socket){
 
     // Initialize Color
-    socket.userColor = "black";
+    socket.userColor = "white";
 
     // DISPLAY CHAT HISTORY
     for (let i = 0; i < chatMessages.length; i++){
@@ -53,7 +61,10 @@ io.on('connection', function(socket){
     }
 
     io.emit('chat', socket.nickname + " has connected");
-    socket.emit('chat', "Hello. Your username is " + socket.nickname);
+    socket.emit('chat', "Hello. Your username is ".fontcolor("white") + socket.nickname.fontcolor("white"));
+    socket.emit('chat', "COMMANDS:".fontcolor("red"));
+    socket.emit('chat', "\\nick newName : change your username".fontcolor("red"));
+    socket.emit('chat', "\\nickcolor : change your color".fontcolor("red"));
     socket.emit('myusername', socket.nickname);
     userList.push(socket.nickname);
 
@@ -71,7 +82,7 @@ io.on('connection', function(socket){
                 sendMessage(msg);
                 // Just emit message
                 let timestamp = new Date().toLocaleTimeString();
-                let chatMessage = timestamp + " " + socket.nickname + ": " + msg.toString();
+                let chatMessage = timestamp + " | " + socket.nickname + ": " + msg.toString();
                 chatMessage = chatMessage.fontcolor(socket.userColor);
                 chatMessages.push(chatMessage);
                 socket.emit('userchat', chatMessage.bold());
@@ -81,7 +92,7 @@ io.on('connection', function(socket){
             else if(!(userList.indexOf(msg.substring(6)) == -1)){
                 // Just emit message
                 let timestamp = new Date().toLocaleTimeString();
-                let chatMessage = timestamp + " " + socket.nickname + ": " + msg.toString();
+                let chatMessage = timestamp + " | " + socket.nickname + ": " + msg.toString();
                 chatMessage = chatMessage.fontcolor(socket.userColor);
                 chatMessages.push(chatMessage);
                 socket.emit('userchat', chatMessage.bold());
@@ -104,7 +115,7 @@ io.on('connection', function(socket){
 
                 // Just emit message
                 let timestamp = new Date().toLocaleTimeString();
-                let chatMessage = timestamp + " " + socket.nickname + ": " + msg.toString();
+                let chatMessage = timestamp + " | " + socket.nickname + ": " + msg.toString();
                 chatMessage = chatMessage.fontcolor(socket.userColor);
                 chatMessages.push(chatMessage);
                 socket.emit('userchat', chatMessage.bold());
@@ -119,7 +130,7 @@ io.on('connection', function(socket){
 
             // Just emit message
             let timestamp = new Date().toLocaleTimeString();
-            let chatMessage = timestamp + " " + socket.nickname + ": " + msg.toString();
+            let chatMessage = timestamp + " | " + socket.nickname + ": " + msg.toString();
             chatMessage = chatMessage.fontcolor(socket.userColor);
             chatMessages.push(chatMessage);
             socket.emit('userchat', chatMessage.bold());
@@ -128,7 +139,7 @@ io.on('connection', function(socket){
         }else{
             // Just emit message
             let timestamp = new Date().toLocaleTimeString();
-            let chatMessage = timestamp + " " + socket.nickname + ": " + msg.toString();
+            let chatMessage = timestamp + " | " + socket.nickname + ": " + msg.toString();
             chatMessage = chatMessage.fontcolor(socket.userColor);
             chatMessages.push(chatMessage);
             socket.emit('userchat', chatMessage.bold());
@@ -146,6 +157,6 @@ io.on('connection', function(socket){
         // Update UserList
         ul = userList.join("\n");
         io.emit('userlist', userList);
-        io.emit('chat', socket.nickname + " has disconnected");
+        io.emit('chat', socket.nickname.fontcolor("white") + " has disconnected".fontcolor("white"));
     });
 });

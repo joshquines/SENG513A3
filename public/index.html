@@ -1,3 +1,12 @@
+
+<!--
+  Marco Quines
+  10138118
+  SENG 513
+  A3 
+  B01
+-->
+
 <!doctype html>
 <html>
   <head>
@@ -5,22 +14,28 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div id="chatdiv">
-    <!-- USERNAME -->
-    <ul id="myusername"></ul>
-
-    <!-- MESSAGES -->
-    <h1>Chat</h1>
-    <ul id="messages"></ul>
-
-    <!-- USERS ONLINE -->
-    <h1>User List</h1>
-    <ul id="userlist"></ul>
+    <div id="usernamediv">
+      <!-- USERNAME -->
+      <ul id="myusername"></ul>
     </div>
+
+    <div id="chatdiv">
+      <!-- MESSAGES -->
+      <h1>Chat</h1>
+      <ul id="messages"></ul>
+    </div>
+
+
+    <div id="userlistdiv">
+      <!-- USERS ONLINE -->
+      <h1>User List</h1>
+      <ul id="userlist"></ul>
+    </div>
+
     <div id="submit">
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
+      <form action="">
+        <input id="m" autocomplete="off" /><button>Send</button>
+      </form>
     </div>
   
     <script
@@ -29,10 +44,5 @@
        crossorigin="anonymous"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/client.js"></script>
-   
-    <!-- USERS ONLINE 
-    <h1>User List</h1>
-    <ul id="userlist"></ul>
-    -->
   </body>
 </html>
