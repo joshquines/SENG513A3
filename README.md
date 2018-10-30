@@ -1,7 +1,11 @@
-# chat-example
+## SENG 513
 
-This is the source code for a very simple chat example used for 
-the [Getting Started](http://socket.io/get-started/chat/) guide 
-of the Socket.IO website.
+A simple chat web application
 
-Please refer to it to learn how to run this application.
+**Usage**
+In terminal of directory:
+- npm install
+- node index
+
+In browser: 
+- http://localhost:3000
